@@ -1,9 +1,3 @@
-board={
-    '7' : ' ','8':' ','9': ' ',
-    '4' : ' ','5':' ','6': ' ',
-    '1' : ' ','2':' ','3': ' ',
-} 
-
 print("Instruction - enter number according to the cell \n ")
 print('7'+' | '+ '8'+' | ' +'9' )
 print('- '+'+'+ ' - '+'+' +' -' )
@@ -14,9 +8,9 @@ print('\n')
 
 
 
-def checkif():
+def checkif(board):
     #horizontal
-    if(board['7']==board['8'] and board['7']==board['9'] ):
+    if(board['7']==board['8'] and board['7']==board['9']):
     
         if(board['7']=='X'):
             print("X won")
@@ -30,7 +24,7 @@ def checkif():
         if(board['4']=='X'):
             print("X won")
             return 1
-        elif(board['7']=='O'):
+        elif(board['4']=='O'):
             print('O won')
             return 1
         
@@ -39,7 +33,7 @@ def checkif():
         if(board['1']=='X'):
             print("X won")
             return 1
-        elif(board['7']=='O'):
+        elif(board['1']=='O'):
             print('O won')
             return 1
          
@@ -58,7 +52,7 @@ def checkif():
         if(board['8']=='X'):
             print("X won")
             return 1
-        elif(board['7']=='O'):
+        elif(board['8']=='O'):
             print('O won')
             return 1
          
@@ -67,7 +61,7 @@ def checkif():
         if(board['9']=='X'):
             print("X won")
             return 1
-        elif(board['7']=='O'):
+        elif(board['9']=='O'):
             print('O won')
             return 1
          
@@ -87,55 +81,68 @@ def checkif():
         if(board['1']=='X'):
             print("X won")
             return 1
-        elif(board['7']=='O'):
+        elif(board['1']=='O'):
             print('O won')
             return 1
          
     return 0
-player='X'
 
-total=0  
+#againplay
+def againplay(board):
+    restart = input("Do want to play Again?(yes/no)")
+    if restart == 'yes':  
+        for key in "123456789":
+            board[key] = " "
+
+        play() 
+
 #gamemain
 print('Lets play!!\n')
-while(True):
-    print(board['7']+' | '+ board['8'] +' | ' + board['9'] )
-    print('- '+'+'+ ' - '+'+' +' -' )
-    print(board['4']+' | '+ board['5'] +' | ' + board['6'])
-    print('- '+'+'+ ' - '+'+' +' -' )
-    print(board['1']+' | '+ board['2']+' | ' + board['3'] )
-    print('***********************************************************')
-    chking=checkif()
-    
-       
-    if total==9 and chking!=1 :
-        print("Boom** it's a Tie!!")
-        break
-    if( total==9 or chking==1):
-        restart = input("Do want to play Again?(1)")
-        if restart == 1 :
-            for key in "123456789":
-                board[key] = ' '
-        else:
-            break
+def play():
+    #creating a board
+    board={
+    '7' : ' ','8':' ','9': ' ',
+    '4' : ' ','5':' ','6': ' ',
+    '1' : ' ','2':' ','3': ' ',
+} 
 
-       
-    while True:
-        
+    total=0 
+    player='X'
+    
+    while total<=9:
+        print(board['7'] + ' | ' + board['8'] + ' | ' + board['9'])
+        print('- + - + - ')
+        print(board['4'] + ' | ' + board['5'] + ' | ' + board['6'])
+        print('- + - + -')
+
+        print(board['1'] + ' | ' + board['2'] + ' | ' + board['3'])
+        cheking_for_winning=checkif(board)
+        if(cheking_for_winning==1):
+            againplay(board)
+            break
+        if total == 9:
+            print("\nGame Over.\n")                
+            print("It's a Tie!!")
+            againplay(board)
+            break
         player_input=input(f'enter ur place {player}\n',)
         if player_input in board and board[player_input]==' ':
             board[player_input]=player
             total+=1
+           
             if player =='X':
                 player='O'
             else:
                 player='X'
-            break
         else:
             print('enter a valid num')
-            continue
-    
-            
+     
+
+ 
+#main
         
+if __name__ == "__main__":
+    play()      
         
 
 
@@ -144,6 +151,9 @@ while(True):
                
 
     
+
+
+
 
 
 
